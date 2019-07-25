@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class MenuSection(models.Model):
@@ -6,6 +7,13 @@ class MenuSection(models.Model):
 
     def __str__(self):
         return f"{self.section}"
+
+
+class Size(models.Model):
+    value = models.CharField(max_length=60)
+
+    def __str__(self):
+        return f"{self.value}"
 
 
 class Topping(models.Model):
@@ -18,7 +26,7 @@ class Topping(models.Model):
 class Item(models.Model):
     category = models.ForeignKey(MenuSection, on_delete=models.CASCADE)
     name = models.CharField(max_length=60)
-    size = models.CharField(max_length=60, blank=True)
+    size = models.ForeignKey(Size, on_delete=models.CASCADE, blank=True, null=True)
     number_of_toppings = models.IntegerField(default=0)
     toppings = models.ManyToManyField(Topping, blank=True, related_name="custom_items")
     price = models.DecimalField(max_digits=10, decimal_places=2)  # support USD$
@@ -29,18 +37,19 @@ class Item(models.Model):
 
 
 class Order(models.Model):
+
     STATUSES = (
         ('cart', 'Cart'),
         ('progress', 'In Progress'),
         ('oiw', 'On it\'s Way')
     )
 
-    user = models.CharField(max_length=60)
-    date_placed = models.DateField()
-    time_placed = models.TimeField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default="")
+    datetime_placed = models.DateTimeField()
+    datetime_fullfilled = models.DateTimeField(default=None, blank=True)
     items = models.ManyToManyField(Item, related_name="cart")
     status = models.CharField(max_length=10, choices=STATUSES, default='cart')
 
     def __str__(self):
-        return f"Order ({self.date_placed} {self.time_placed})"
+        return f"Order ({self.datetime_placed})"
 
