@@ -67,7 +67,12 @@ def registration_attempt(request):
     return render(request, 'orders/login.html', {'login_message': 'Successful registration! Please login.'})
 
 
+def add_item_to_cart(request):
+    return None
+
+
 def logout_view(request):
     logout(request)
     return render(request, 'orders/login.html', {'login_message': 'Logged out.'})
+
 
