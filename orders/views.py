@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from .models import Order, Topping, Item, MenuSection
+from .models import Order, Topping, CustomerItem, MenuItem, MenuSection
 from .database import MenuDB
 
 menu = MenuDB()
