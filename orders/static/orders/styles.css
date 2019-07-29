@@ -98,20 +98,15 @@ a:hover {
     font-size: 16px;
 }
 
-.section-underscore {
-    border: 1px solid black;
-    width: 60%;
-}
-
 .menu-category {
-    margin: 20px;
+    margin: 15px;
     padding: 20px;
 }
 
 .menu-section {
     color: black;
     font-size: 25px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .itemForm {
