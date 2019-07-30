@@ -1,4 +1,4 @@
-## _Pinnochio's Pizza & Subs_
+## Pinnochio's Pizza & Subs
 
 ## I. About
 
