@@ -122,6 +122,7 @@ button:hover {
     margin-top: 5%;
     text-align: center;
     border: 1px solid black;
+    margin-bottom: 50px;
 }
 
 .header-underscore {
@@ -152,7 +153,7 @@ button:hover {
 .itemForm {
     margin-bottom: 25px;
     padding: 15px;
-    background-color: #FFFACD;
+    background-color: #EDEDED;
 }
 
 .itemForm .btn {
@@ -224,22 +225,6 @@ th {
 .cart-font {
     font-size: 17px;
     font-color: #b21807;
-}
-
-#back-to-menu {
-    background-color: #FFFACD;
-    margin: auto;
-    padding-left: 20px;
-    padding-right: 20px;
-    width: 80%;
-    max-width: 800px;
-    min-width: 500px;
-    margin-top: 5%;
-    text-align: center;
-}
-
-#back-to-menu a {
-    color: black;
 }
 
 input[type=text]:focus{

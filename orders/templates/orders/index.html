@@ -22,6 +22,12 @@
                 </li>
             {% endif %}
             <li>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn" id="logout" type="submit">Logout</button>
+                </form>
+            </li>
+            <li>
                 <form action="{% url 'view_cart' %}" method="post">
                     {% csrf_token %}
                     <button class="btn shopping-cart">
@@ -31,12 +37,6 @@
                             <i class="fa fa-shopping-cart"></i>
                         {% endif %}
                     </button>
-                </form>
-            </li>
-            <li>
-                <form action="{% url 'logout' %}" method="post">
-                    {% csrf_token %}
-                    <button class="btn" id="logout" type="submit">Logout</button>
                 </form>
             </li>
         </ul>
