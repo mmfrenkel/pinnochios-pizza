@@ -21,10 +21,6 @@ name and email. If the username is already taken, the customer will be prompted 
 another username. If the username is available, their account will be created and the user
 will be redirected back to the login page to login.
 
-<p align="center">
-  <img src="./site_images/register.png" width="700" title="Register">
-</p>
-
 Once the customer has been authenticated, they will be brought to the website's main landing page,
 which surfaces all the items on the _Pinnochio's Pizza & Subs_ menu (shown below).
 
@@ -44,7 +40,7 @@ The dropdown of the menu item additionally surfaces the price for each item and 
 
 A customer may then add a customized item to their cart by clicking on the `Add to Cart` button, at which point the black
 cart icon at the top of the screen will show `(1)`. As a customer adds other items to their cart, 
-the cart icon will increment until an order is placed. Customers may also view the contents on their cart
+the cart icon will increment until an order is placed (the cart below shows 2 items). Customers may also view the contents on their cart
 by clicking on this cart icon.
 
 <p align="center">
