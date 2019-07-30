@@ -42,7 +42,6 @@ def get_menu_size_by_value(size):
 
 
 def get_menu_item_by_attributes(category, item_name):
-    print(f"{category}...{item_name}")
     item = MenuItem.objects.filter(category__name=category).filter(item__name=item_name)
     if len(item) > 1:
         raise ItemToCartException("Multiple items distinct on section + item for submitted item. Resolve duplicate.")
@@ -111,7 +110,7 @@ def add_item_to_customer_cart(username, customer_item):
             cart_created=timezone.now()
         )
     cart.items.add(customer_item)
-    cart.final_cost = calculate_total_cost(cart.items.all())
+    cart.total_cost = calculate_total_cost(cart.items.all())
     cart.save()
 
 
@@ -120,7 +119,7 @@ def place_order(username):
     cart = get_active_cart(username)
     cart.status = 'progress'
     cart.order_placed = timezone.now()
-    cart.final_cost = calculate_total_cost(cart.items.all())
+    cart.total_cost = calculate_total_cost(cart.items.all())
     cart.save()
 
 

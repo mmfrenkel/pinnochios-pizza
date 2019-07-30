@@ -9,7 +9,6 @@ class OrdersTestCase(TestCase):
     USER = 'admin'
 
     def setUp(self):
-        # a function built-in to unittest/django framework that runs before any individual test
 
         admin = User.objects.create_user(
             username=self.USER,
@@ -33,7 +32,7 @@ class OrdersTestCase(TestCase):
         small = Size.objects.create(value="Small")
         large = Size.objects.create(value="Large")
 
-        # CREATE ITEMS
+        # ------------------------------ CREATE ITEMS -----------------------------  #
 
         # -- 1 Topping Pizza-- #
         item = Item.objects.create(name="Cheese Pizza - 1 Topping")
@@ -87,6 +86,7 @@ class OrdersTestCase(TestCase):
             price=8.45
         )
         customer_item2.toppings.add(extra_cheese)
+        # ------------------------------  ITEMS -----------------------------  #
 
     def test_menu_item_count(self):
         a = MenuItem.objects.all()
@@ -158,6 +158,15 @@ class OrdersTestCase(TestCase):
         expected = 1
         self.assertEqual(result, expected)
 
+    def test_add_item_to_customer_cart_total_cost(self):
+
+        customer_item = CustomerItem.objects.first()
+        add_item_to_customer_cart(self.USER, customer_item)
+
+        result = float(Order.objects.get(user__username=self.USER).total_cost)
+        expected = 13.20
+        self.assertEqual(result, expected)
+
     def test_place_order(self):
 
         # create an order.
@@ -171,3 +180,4 @@ class OrdersTestCase(TestCase):
         result = (in_progress, in_cart)
         expected = (1, 0)
         self.assertEqual(result, expected)
+
