@@ -1,3 +1,205 @@
-# Project 3
+# _Pinnochio's Pizza & Subs_
 
-Web Programming with Python and JavaScript
+## I. About
+
+_Pinnochio's Pizza & Subs_ Website is an interactive Django web application that surfaces the 
+menu of an existing restaurant in Cambridge, Massachusetts, and allows customer's to 
+customize their order, add items to their cart and ultimately place an order. Admin users
+also have access to page that allows them to view all orders and their statuses.
+
+## II. User Navigation + Usage
+
+All customers who attempt to access the _Pinnochio's Pizza & Subs_ website will first be 
+asked to login with their credentials in the page captured below.
+
+<p align="center">
+  <img src="./site_images/login.png" width="700" title="Login">
+</p>
+
+If no credentials exist, customers may register for an account by providing a username, their
+name and their email. If the username is already taken, a customer will be prompted to provide
+another username. If the username is available, their account will be created and the user
+will be redirected back to the login page to login.
+
+<p align="center">
+  <img src="./site_images/register.png" width="700" title="Register">
+</p>
+
+Once the customer has been authenticated, they are brought to the website's main landing page,
+which surfaces all the items on the _Pinnochio's Pizza & Subs_ menu (shown below).
+
+<p align="center">
+  <img src="./site_images/menu.png" width="700" title="Menu">
+</p>
+
+Here, a customer may peruse the various menu item options and if interested in a particular 
+item, click on that item to view customizations. Depending on the menu item, a customer 
+may customize (1) size and (2) toppings (see an example dropdown below). Note that the number of 
+topping options for any given item is pre-defined by the _Pinnochio's Pizza & Subs_ admin
+The dropdown additionally surfaces prices for each item and for any added toppings.
+
+<p align="center">
+  <img src="./site_images/customization.png" width="700" title="Customization">
+</p>
+
+A customer may then add a customized item to their cart by clicking on the `Add to Cart` button, at which point the black
+cart icon at the top of the screen will show `(1)`. As a customer adds other items to their cart, 
+the cart icon will increment until they place their order. Customers may also view the contents on their cart
+by clicking on this cart icon.
+
+<p align="center">
+  <img src="./site_images/cart.png" width="700" title="Cart">
+</p>
+
+Once satisfied with their selected items, customers may navigate again to the cart to review their items and
+ultimately submit an order by providing their email. This email address is used to send an auto-generated
+confirmation email to the customer that their order has been placed!
+
+<p align="center">
+  <img src="./site_images/admin.png" width="700" title="Admin Page">
+</p>
+
+#### Admin Only Notification
+For administrators of the site, an additional navigation bar is provided that, which clicked,
+displays all orders currently in the database and their statuses. Hence, the `View All Orders`
+ button shown in the images above are not visible to customers. Note additionally that statuses are limited 
+to the following: 
+* `In Cart`: a customer has added items, but not purchased them
+* `In Progress`: an order is cooking
+* `On it's Way`: an order is on-route to the customer
+* `Delivered`: an order is delivered or picked-up by the user.
+
+An example of this order page is shown below.
+
+<p align="center">
+  <img src="./site_images/app-no-messages.png" width="700" title="App Without Messages">
+</p>
+
+## III. Website Components
+
+
+### HTML + CSS
+
+This application works off of a several HTML pages, each extending a single template (`orders/template.html`):
+* `login.html`: surfaces the login page for the user
+* `register.html`: surfaces ther registration page for the user
+* `index.html`: surfaces the main menu page of the website
+* `cart.html`: shows the customer cart 
+* `all_order.html`: shows all orders ever placed for site administrators only.
+
+All formatting for the website is controlled by a single stylesheet, found in
+`orders/static/orders/styles.css`.
+
+Images and icons used in this website can similarly be found under `orders/static/img/`.
+
+### Django
+
+This application uses Django, a high-level python framework for web development. Django facilitates
+in (1) the creation of a database and migrations of the database model, (2) configuration of routes and (3) sending emails to 
+website users, among other features. 
+
+#### a. Database Model
+
+The database model underlying this project can be found in `orders/database.py`. This model
+includes the following model classes:
+* `MenuSection()`: representing a single menu section (i.e., Subs)
+* `Size()`: represents available sizes of items (i.e., small)
+* `Topping()`: represents available toppings (i.e., onions)
+* `Item()`: represents the an individual menu item name only, for model purposes
+* `Price()`: represents a unique combination of price with size and item
+* `MenuItem()`: represents a single item on the menu in its entirety, designed with available
+customer options in mind
+* `CustomerItem()`: a customized item created be a customer (i.e., small cheese pizza with onions costing $14.40)
+* `Order()`: an order object representing all CustomerItems() in that order, capturing time of actions of that order.
+
+The database was modeled off of the menu on the real _Pinnochio's Pizza & Subs_ website
+found here: http://www.pinocchiospizza.net/menu.html. 
+
+This project utilizes a sqlite relational database (the default) that was created using the code stored in 
+`orders/build_database.py`. This file creates each item in the database, with the correct relationships, in the case
+that the database would need to be regenerated again.
+
+If changes to the database model are necessary, see the section entitled `Develop`  under`IV. Usage Locally`  
+for more information on database migrations.
+
+#### b. Routes
+
+Routes for the website are configured in this applications `orders/views.py` file, allowing
+for users to login, logout, register, add items to cart, submit an actual order and view all orders (for administrators).
+Urls for these routes can be found in the associated `orders/urls.py` file.
+
+#### c. Settings
+
+Settings for the project were updated from their default settings in the `pizza/settings.py` file.
+In addition to adding the `orders` app to  `INSTALLED_APPS`, at the bottom of the page, changes were made to settings 
+relevant for enabling emails. A fake email address was created on Google.com for this application to use to send
+emails (`pinnochiopizzaandsubs@gmail.com`), with a password accessible via environmental variables (see more below).
+
+## IV. Usage Locally
+
+In order to deploy _Chirp!_ locally, please follow the steps below.
+
+### Setup 
+
+#### 1. Create local python environment
+Modules required for this project are outlined in `requirements.txt`. You may create a 
+virtual environment with this requirements with the following commands:
+
+(1) Create your virtual environment (venv):
+```
+$ pip install virtualenv
+$ virtualenv venv
+``` 
+
+(2) Activate your venv:
+```
+$ source venv/bin/activate
+```
+(3) Install your requirements:
+```
+$ pip install -r requirements.txt
+```
+
+#### 2. Set environmental variables
+Running this project locally requires configuring a single local environmental variable (`PIZZA_EMAIL_PASSWORD`)
+that represents the password associated with the _Pinnochio's Pizza & Subs_ email account 
+(`pinnochiopizzaandsubs@gmail.com`) that is required in order to email confirmation emails to customers. 
+
+_Password hint_: pizza (all lowercase) + subs (all uppercase) + year that application was created
+
+### Run
+
+With the above completed, you can deploy the website locally and review it via:
+```
+(venv) $ python manage.py runserver
+```
+Use the resulting url printed out by Django in any browser. 
+
+### Develop
+
+#### a. Database migrations
+
+Run database migrations, after making changes to the database model in `orders/models.py` with the following commands:
+```
+(venv) $ python manage.py makemigrations
+(venv) $ python migrate --run-syncdb
+```
+Confirm that migrations were successful by identifying a new file in the `orders/migrations` directory.
+
+#### b. Tests
+
+Django facilities testing by extending python's unittest testing framework. Tests for this application can
+be run via:
+```
+(venv) $ python manage.py test
+```
+
+## V. Developer Notes 
+This project was developed on a Macbook (macOS Mojave) and was primarily tested in
+Safari and Chrome.
+
+### Future Releases
+Future releases of _Pinnochio's Pizza & Subs_ website will allow users to view their previous orders and
+check on the status of their order, as well as include upgrades to the autogenerated email.
+
+

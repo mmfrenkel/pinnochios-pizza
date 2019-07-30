@@ -6,10 +6,11 @@ from .database import *
 
 class OrdersTestCase(TestCase):
 
-    USER = 'admin'
+    USER = 'admin' # always use admin as user
 
     def setUp(self):
 
+        # setup user
         admin = User.objects.create_user(
             username=self.USER,
             email='admin@admin.org',
@@ -127,7 +128,7 @@ class OrdersTestCase(TestCase):
 
     def test_user_has_open_cart_true(self):
 
-        order = Order.objects.create(
+        Order.objects.create(
             user=User.objects.get(username=self.USER),
             cart_created=timezone.now()
         )
@@ -137,7 +138,7 @@ class OrdersTestCase(TestCase):
 
     def test_create_new_customer_item(self):
 
-        customer_item = create_new_customer_item(
+        create_new_customer_item(
             username=self.USER,
             category='Subs',
             item_name='Italian Sub',
@@ -169,7 +170,7 @@ class OrdersTestCase(TestCase):
 
     def test_place_order(self):
 
-        # create an order.
+        # create an Order() to test on
         customer_item = CustomerItem.objects.first()
         add_item_to_customer_cart(self.USER, customer_item)
         place_order(self.USER)
