@@ -24,14 +24,71 @@ a {
     font-size: 16px;
 }
 
+/***  Button Formatting ***/
 a:hover {
     color: black;
 }
 
+button:hover {
+    background-color: black;
+}
+
+#order:hover {
+    background-color: black;
+}
+
+.btn {
+    background-color: #b21807;
+    border: #b21807;
+    color: white;
+    margin-top: 20px;
+    text-align: center;
+    margin:0 auto;
+}
+
+.navbar-nav .btn {
+    margin-left: 15px;
+    height: 48px;
+}
+
+.shopping-cart {
+    font-size: 24px;
+    margin-left: 20px;
+    background-color: black;
+    height: 48px;
+}
+
+.shopping-cart:hover {
+    background-color: #b21807;
+}
+
+
+/** Navigation Bar **/
+
+@media (min-width: 900px) {
+    #title::before {
+        content: "Welcome to Pinnochio’s Pizza & Subs!";
+    }
+}
+
+@media (max-width: 900px) {
+    #title::before {
+        content: "Pinnochio’s Pizza & Subs!";
+    }
+}
+
+@media (max-width: 600px) {
+    #title::before {
+        content: "Pinnochio’s!";
+    }
+}
 
 #title {
     font-size: 28px;
 }
+
+
+/*** Login ***/
 
 #login_container {
     background-color: white;
@@ -52,25 +109,8 @@ a:hover {
     margin: auto;
 }
 
-.btn {
-    background-color: #b21807;
-    border: #b21807;
-    color: white;
-    margin-top: 20px;
-    text-align: center;
-    margin:0 auto;
-}
 
-.shopping-cart {
-    font-size: 24px;
-    margin-left: 20px;
-    background-color: black;
-    height: 48px;
-}
-
-#logout {
-    height: 48px;
-}
+/** Menu Page **/
 
 #menu-container {
     background-color: white;
@@ -136,21 +176,75 @@ a:hover {
     text-align-last: center;
 }
 
-.question {
-    font-weight
+/***  Elements for Cart page ***/
+
+#cart-container {
+    background-color: white;
+    margin: auto;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 80%;
+    max-width: 800px;
+    min-width: 500px;
+    margin-top: 5%;
+    text-align: center;
+    border: 1px solid black;
 }
 
-
-@media (min-width: 800px) {
-  #title::before {
-    content: "Welcome to Pinnochio’s Pizza & Subs!";
-  }
-  #
+#order-total {
+    font-size: 18px;
 }
 
-@media (max-width: 800px) {
-  #title::before {
-    content: "Pinnochio’s Pizza & Subs!";
-  }
+#cart-container #orderForm {
+    width: 70%;
+    margin:0 auto;
+    margin-top: 40px;
+}
+
+#cart-container h4 {
+    margin:20px;
+}
+
+table {
+    align: center;
+    border-bottom: 1px solid lightgrey;
+}
+
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+
+th {
+    border-top: 1px solid black;
+    background-color: #FFFACD;
+}
+
+.no-cart {
+    font-size: 17px;
+    font-color: #b21807;
+}
+
+#back-to-menu {
+    background-color: white;
+    margin: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 80%;
+    max-width: 800px;
+    min-width: 500px;
+    margin-top: 5%;
+    text-align: center;
+    border: 1px solid black;
+}
+
+#back-to-menu a {
+    color: black;
+}
+
+input[type=text]:focus{
+  outline: 2px solid black;
+  box-shadow: 0 0 0 1px black;
 }
 

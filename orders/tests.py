@@ -158,4 +158,16 @@ class OrdersTestCase(TestCase):
         expected = 1
         self.assertEqual(result, expected)
 
+    def test_place_order(self):
 
+        # create an order.
+        customer_item = CustomerItem.objects.first()
+        add_item_to_customer_cart(self.USER, customer_item)
+        place_order(self.USER)
+
+        in_progress = len(Order.objects.filter(status='progress'))
+        in_cart = len(Order.objects.filter(status='cart'))
+
+        result = (in_progress, in_cart)
+        expected = (1, 0)
+        self.assertEqual(result, expected)
