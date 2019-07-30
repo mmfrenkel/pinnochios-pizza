@@ -176,9 +176,9 @@ button:hover {
     text-align-last: center;
 }
 
-/***  Elements for Cart page ***/
+/***  Elements for 'Cart' and 'All Orders' Pages ***/
 
-#cart-container {
+#cart-container, #order-container {
     background-color: white;
     margin: auto;
     padding-bottom: 20px;
@@ -218,16 +218,16 @@ th, td {
 
 th {
     border-top: 1px solid black;
-    background-color: #FFFACD;
+    background-color: lightgrey;
 }
 
-.no-cart {
+.cart-font {
     font-size: 17px;
     font-color: #b21807;
 }
 
 #back-to-menu {
-    background-color: white;
+    background-color: #FFFACD;
     margin: auto;
     padding-left: 20px;
     padding-right: 20px;
@@ -236,7 +236,6 @@ th {
     min-width: 500px;
     margin-top: 5%;
     text-align: center;
-    border: 1px solid black;
 }
 
 #back-to-menu a {
