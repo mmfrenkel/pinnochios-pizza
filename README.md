@@ -53,7 +53,8 @@ confirmation email to the customer that their order has been placed! This confir
 order number (matching the database id for that order), in the case that they need to call _Pinnochio's_ about their order.
 
 
-#### Admin Only Notification
+#### Administrators Only
+
 For administrators of the site, an additional navigation bar is provided that, when clicked,
 displays all orders currently in the database and their current status (hence, the `View All Orders`
  button shown in the images above are not visible to customers). Note additionally that statuses are limited 
@@ -69,13 +70,17 @@ An example of this order page is shown below.
   <img src="./site_images/admin.png" width="700" title="Admin Page">
 </p>
 
+Additionally, only administrators have access to editing the database through
+the `/admin` endpoint of the web application, made available by Django (see more below). 
+Any item in the database model (see more below) can be edited, created, and deleted from this admin interface.
+
 ## III. Website Components
 
 ### Django
 
 This application uses Django, a high-level python framework for web development. Django facilitates
 in (1) the creation of a database and migrations of the database model, (2) configuration of routes (3) templating of html
- pages (as above) and (3) sending emails to  website users, among other features. This Django project utilizes only one app, `orders`.
+ pages (as above) and (4) sending emails to  website users, among other features. This Django project utilizes only one app, `orders`.
 
 #### a. Database Model
 
@@ -100,7 +105,8 @@ in the case that the database needs to be regenerated again. Because the databas
 was committed as part of this project (see `db.sqlite3`).
 
 If changes to the database model are necessary, see the section entitled `Develop`  under`IV. Usage Locally`  
-for more information on database migrations.
+for more information on database migrations. Additions, changes, and deletions to individual items in the database
+can be accomplished by logging into the admin UI with a `superuser` login at the `/admin` endpoint of the webpage. 
 
 #### b. Routes
 
@@ -183,6 +189,15 @@ To run database migrations, after making changes to the database model in `order
 (venv) $ python migrate --run-syncdb
 ```
 Confirm that migrations were successful by identifying a new file in the `orders/migrations` directory.
+
+#### b. Create new administrator (`superuser`)
+
+Administrators have access to the Django database UI for editing database items and the ability to view all orders 
+from the website. Create a new administrator using the following command:
+
+```
+(venv) $ python manage.py createsuperuser
+```
 
 #### b. Tests
 
